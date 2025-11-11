@@ -1,0 +1,145 @@
+✅ 0–1 Knapsack Problem — Theory
+
+In 0–1 knapsack:
+
+You have n items
+
+Each item has:
+
+weight wi
+
+profit/value pi
+
+Knapsack has capacity W
+
+You must choose items completely or not at all
+(no fractions → unlike fractional knapsack)
+
+Goal: Maximize total profit while total weight ≤ W.
+
+Because decisions are discrete (0 or 1), greedy does not work.
+
+Two classic optimal methods:
+
+Dynamic Programming (DP)
+
+Branch and Bound (B&B)
+
+✅ 1. Dynamic Programming Approach (DP)
+✅ Concept
+
+DP solves 0–1 knapsack by building a table DP[i][w]:
+
+i = first i items
+
+w = weight capacity from 0 to W
+
+DP[i][w] = maximum profit using first i items with capacity w
+
+✅ Table Formation Rule
+
+For each item i and capacity w:
+
+If item weight > w → cannot include
+→ DP[i][w] = DP[i-1][w]
+
+Otherwise choose max of:
+
+including item i → pi + DP[i−1][w−wi]
+
+excluding item i → DP[i−1][w]
+
+Thus:
+
+DP[i][w] = max( DP[i-1][w],  pi + DP[i-1][w-wi] )
+
+
+Finally, DP[n][W] gives the answer.
+
+✅ Why DP works?
+
+DP uses optimal substructure and overlapping subproblems:
+
+Best solution for n items depends on best solution for smaller capacity/items.
+
+It avoids recomputation by storing all results.
+
+✅ DP Time & Space Complexity
+DP Version	Time Complexity	Space Complexity
+Standard DP table	O(nW)	O(nW)
+Space-optimized version	O(nW)	O(W)
+
+Where W is capacity, n is number of items.
+
+✅ 2. Branch and Bound Approach
+✅ Concept
+
+Branch & Bound treats the knapsack choices as a binary tree:
+
+Each node = decision (include or exclude an item)
+
+Left child = include item
+
+Right child = exclude item
+
+We compute a bound (upper limit on possible profit from that node).
+If the bound is less than current best, we prune the branch.
+
+This avoids exploring useless combinations, giving faster performance in many cases.
+
+✅ Upper Bound Calculation
+
+The bound is computed using fractional knapsack idea:
+
+Take remaining capacity and fill using highest profit/weight ratio items.
+
+This gives the maximum possible profit from that node.
+
+Since it may include fractions, bound ≥ true max.
+
+✅ Why Branch & Bound works?
+
+It reduces search by discarding branches that cannot lead to better solutions.
+
+Performs well on average, especially when profits are high or sorted well.
+
+✅ B&B Time & Space Complexity
+
+Worst case (when pruning is poor):
+
+Time: O(2ⁿ)
+because exploring entire subset tree is exponential.
+
+Typical / expected case (when pruning is effective):
+
+Much faster than exponential
+
+Often close to polynomial for many input distributions
+
+Space complexity:
+
+O(n) for the recursion/queue and storing node states.
+
+✅ Exam-Ready Summary
+✅ Dynamic Programming (DP)
+
+Builds a table storing solutions to subproblems.
+
+Uses recurrence:
+DP[i][w] = max( DP[i-1][w], pi + DP[i-1][w-wi] )
+
+Guarantees optimal result.
+
+Time: O(nW)
+Space: O(nW) or O(W)
+
+✅ Branch and Bound (B&B)
+
+Uses a tree of decisions (include/exclude).
+
+Uses fractional-knapsack bound to prune branches.
+
+Explores only promising parts of the solution space.
+
+Time: Worst O(2ⁿ), typically much faster
+Space: O(n)
