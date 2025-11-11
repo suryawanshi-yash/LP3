@@ -1,0 +1,170 @@
+✅ Theory for Uber Fare Prediction Practical
+1. Pre-processing the Dataset
+
+Pre-processing means preparing raw data so that it can be used effectively by machine learning models. The Uber fare dataset contains information like pickup/drop-off coordinates, passenger count, and fare amount.
+
+Key Pre-processing Steps
+
+Handling Missing Values:
+Remove or impute rows with missing or null entries (e.g., missing fares or coordinates).
+
+Removing Duplicates:
+Ensures the model is trained on unique observations.
+
+Data Type Conversion:
+Convert fields like pickup_datetime to datetime format so you can extract features like hour, day, month.
+
+Feature Engineering:
+
+Extract time-based features: hour of day, weekday, month, year.
+
+Compute distance between pickup and drop-off using haversine formula (important predictor of fare).
+
+Handling Invalid Entries:
+Remove rows where:
+
+Passenger count ≤ 0 or unrealistic (e.g., > 8)
+
+Coordinates lie outside valid ranges
+
+Fare amount is negative
+
+Scaling or Normalization (if needed):
+Linear regression often benefits from feature scaling.
+
+✅ 2. Identifying Outliers
+
+Outliers are abnormal values that distort the model.
+
+How to Detect Outliers
+
+Boxplot / IQR Method:
+For variables like fare_amount or distance, values below Q1 − 1.5×IQR or above Q3 + 1.5×IQR are outliers.
+
+Z-Score:
+Observations more than ±3 standard deviations from the mean.
+
+Visual Methods:
+
+Scatter plots (fare vs distance)
+
+Distribution plots
+
+Common Outliers in Uber Dataset
+
+Extremely high fares (e.g., > $200)
+
+Very long distances (pickup and drop-off far apart)
+
+Zero distance but positive fare
+
+Negative fares
+
+Outliers can be removed or capped depending on the model.
+
+✅ 3. Checking the Correlation
+
+Correlation shows how strongly variables relate to each other.
+
+Why Correlation Matters
+
+Helps identify features that influence fare amount.
+
+Detects multicollinearity (important for linear regression).
+
+Typical Correlations in This Dataset
+
+Distance is highly positively correlated with fare (main predictor).
+
+Time-based features may show some correlation:
+
+Higher fares during peak hours or weekends.
+
+Passenger count has weak or moderate correlation.
+
+Tools Used
+
+Correlation matrix
+
+Heatmap
+
+Pair plots
+
+✅ 4. Implementing Regression Models
+A. Linear Regression
+
+A simple model that assumes a linear relationship between features (distance, time, etc.) and the target (fare).
+
+Sensitive to outliers and multicollinearity.
+
+Good baseline model for continuous prediction tasks.
+
+B. Random Forest Regression
+
+An ensemble model built from many decision trees.
+
+Captures non-linear relationships.
+
+More robust to outliers and noisy data.
+
+Usually performs better for complex datasets like Uber fares.
+
+✅ 5. Model Evaluation and Comparison
+Metrics Used
+
+R² Score (Coefficient of Determination):
+
+Measures how well the model explains variance in fare.
+
+Closer to 1 → better performance.
+
+RMSE (Root Mean Squared Error):
+
+Measures average prediction error.
+
+Lower RMSE → better model.
+
+MAE (Mean Absolute Error) (sometimes used):
+
+Average absolute difference between predicted and actual fares.
+
+Typical Results (Expected Trends)
+
+Linear Regression:
+
+Moderate performance
+
+Higher RMSE due to assumption of linearity
+
+Random Forest Regressor:
+
+Higher R²
+
+Lower RMSE
+
+Learns complex patterns (e.g., non-linear relation between distance and fare)
+
+Conclusion
+
+Random Forest usually outperforms Linear Regression for this dataset.
+
+✅ Short Viva Questions & Answers (Useful for practical exam)
+Q1. Why calculate distance?
+
+Because fare is strongly dependent on the distance traveled; it's the most important predictor.
+
+Q2. Why use Random Forest?
+
+It handles non-linear relationships and outliers better than linear regression.
+
+Q3. What does R² represent?
+
+It shows how much of the variation in fare is explained by the model.
+
+Q4. Why remove outliers?
+
+Outliers distort the regression line and reduce prediction accuracy.
+
+Q5. Why extract datetime features?
+
+Fare pricing may vary by hour, day, or month, so these features improve predictions.
