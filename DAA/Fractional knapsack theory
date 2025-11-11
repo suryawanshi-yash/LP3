@@ -1,0 +1,99 @@
+✅ Fractional Knapsack Problem – Theory (Greedy Method)
+
+You are given:
+
+A knapsack with capacity W
+
+n items, each with:
+
+weight wi
+
+profit/value pi
+
+In the fractional knapsack, you are allowed to take fractions of an item
+(e.g., you can take half of an item).
+
+✅ Goal:
+
+Maximize total profit while ensuring total weight ≤ W.
+
+✅ Key Idea of the Greedy Method
+
+The greedy method works because in the fractional knapsack, the best strategy is to:
+
+✅ Take items in decreasing order of value/weight ratio (pi/wi)
+
+This ratio tells you how much profit you get per unit weight.
+
+Steps:
+
+Calculate profit-to-weight ratio for each item.
+
+Sort the items in decreasing order of this ratio.
+
+Start picking items:
+
+If the whole item fits → pick it.
+
+If not → take a fraction of the item equal to remaining knapsack capacity.
+
+Stop when the knapsack is full.
+
+This strategy guarantees the optimal solution, unlike 0/1 knapsack (which needs DP).
+
+✅ Why greedy works? (Conceptual Reasoning)
+
+Because profits add linearly with fractions.
+
+If item A gives more profit per unit weight than item B,
+taking even a small amount of A is always better than B.
+
+There is no dependency between items, so local optimal choice → global optimum.
+
+✅ Time Complexity
+
+Breaking down the operations:
+
+Computing ratios → O(n)
+
+Sorting items by ratio → O(n log n) (dominant term)
+
+Picking items → O(n)
+
+✅ Overall Time Complexity: O(n log n)
+(due to sorting)
+
+✅ Space Complexity
+
+Need an array of items with (profit, weight, ratio)
+
+Sorting usually done in-place
+
+✅ Space Complexity: O(1) to O(n)
+(depending on sorting method; typically O(1) extra)
+
+✅ Step Count (High Level)
+
+Compute all ratios → n steps
+
+Sort → approx n log n comparisons
+
+Pick items → up to n iterations
+
+So overall steps ≈ n log n
+
+✅ Short, Exam-Ready Theory Answer
+
+Here is the crisp version you can use in your practical file:
+
+Fractional Knapsack (Greedy) – Theory
+
+In the fractional knapsack problem, we can take any fraction of an item. To maximize total profit, we compute the profit/weight ratio for each item and sort them in decreasing order. We then take items according to this order. If the remaining capacity can accommodate the whole item, we take it; otherwise, we take a fraction of that item equal to the available capacity. This greedy approach always gives the optimal solution because each fraction contributes profit linearly based on its ratio.
+
+Time Complexity: O(n log n) (due to sorting)
+
+Space Complexity: O(1) to O(n) depending on implementation
+
+Greedy Choice: Highest profit-to-weight ratio first
+
+Step Count: ~n log n
