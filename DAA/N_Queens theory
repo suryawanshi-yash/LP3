@@ -1,0 +1,150 @@
+✅ N–Queens Using Backtracking (Theory)
+
+The N-Queens problem requires placing N queens on an N×N chessboard such that:
+
+No two queens attack each other
+
+That means:
+
+No two queens share the same row
+
+No two queens share the same column
+
+No two queens share the same diagonal
+
+Your task:
+“Design an N-Queens matrix having the first queen already placed, then use backtracking to place the remaining queens.”
+
+✅ 1. Initial Setup
+
+We represent the board as an N×N matrix:
+
+1 → Queen is placed
+
+0 → Empty cell
+
+You are given the first queen’s position.
+Example: If the first queen is placed at row 0, column 2, your starting matrix is:
+
+0 0 1 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+
+
+Now you must fill the remaining queens using backtracking.
+
+✅ 2. Backtracking – Core Concept
+
+Backtracking is a depth-first search approach where:
+
+You place a queen in a valid position
+
+Move to the next row
+
+If you run into a conflict, you backtrack:
+
+Remove the queen
+
+Try the next possible column
+
+This continues until:
+
+✅ A solution is found
+or
+❌ All configurations are exhausted (then no solution exists)
+
+✅ 3. Safety Checks
+
+Before placing a queen at (row, col) you must check:
+
+✅ A. Column Safety
+
+No other queen should be in the same column.
+
+✅ B. Major Diagonal Safety
+
+(upper-left ↖ and lower-right ↘)
+
+Check if any queen lies on:
+
+(row - x, col - x)   or   (row + x, col + x)
+
+✅ C. Minor Diagonal Safety
+
+(upper-right ↗ and lower-left ↙)
+
+Check:
+
+(row - x, col + x)   or   (row + x, col - x)
+
+
+Only if all three conditions pass, you place the queen.
+
+✅ 4. Backtracking Algorithm – Step-by-Step Theory
+
+Start with the first queen already placed.
+
+Begin from the next row.
+
+Try placing a queen in each column of the current row.
+
+For every attempted position:
+
+Check if it is safe (row, column, and diagonal constraints).
+
+If safe:
+
+Place the queen.
+
+Move to the next row.
+
+If no safe position exists in that row:
+
+Backtrack → Remove the queen from the previous row.
+
+Try the next column for that queen.
+
+Continue until:
+
+All queens are placed → Solution is found
+
+Or all possibilities are exhausted → No solution
+
+✅ 5. Why Backtracking Works
+
+Because the search space is huge (N choices per row):
+
+Backtracking eliminates invalid configurations early.
+
+It avoids exploring unnecessary paths.
+
+It guarantees finding all valid solutions.
+
+✅ 6. Time Complexity
+
+Worst-case:
+
+At most N possibilities per row
+
+Depth = N rows
+
+✅ Time Complexity: O(N!)
+
+This is because each queen reduces available choices drastically.
+
+✅ 7. Space Complexity
+
+The board uses O(N²) space
+
+The recursion stack (depth N) uses O(N)
+
+✅ Space Complexity: O(N²)
+(Or O(N) if only storing queen positions per row.)
+
+✅ 8. Exam-Ready Summary (Short Version)
+
+The N-Queens problem places N queens on an NxN chessboard so that no two queens attack each other. Starting with the first queen fixed, backtracking is used to place the remaining queens row by row. For each row, every column is tested. A queen is placed only if the column and both diagonals are safe. If no valid column exists in a row, the algorithm backtracks by removing the previous queen and trying the next column. This process continues until all queens are placed.
+
+Time complexity: O(N!)
+Space complexity: O(N²) (board) or O(N) (column positions)
