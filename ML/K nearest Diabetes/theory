@@ -1,0 +1,251 @@
+✅ Theory for Diabetes Prediction Using K-Nearest Neighbors Algorithm
+Aim
+
+To implement the K-Nearest Neighbors (KNN) classification algorithm on the diabetes.csv dataset and evaluate the model using:
+
+Confusion Matrix
+
+Accuracy
+
+Error Rate
+
+Precision
+
+Recall
+
+✅ 1. Introduction
+
+The goal is to predict whether a patient has diabetes based on diagnostic health measurements such as:
+
+Pregnancies
+
+Glucose
+
+BloodPressure
+
+SkinThickness
+
+Insulin
+
+BMI
+
+DiabetesPedigreeFunction
+
+Age
+
+The target variable is Outcome:
+
+1 → Diabetic
+
+0 → Non-diabetic
+
+The dataset comes from the PIMA Indians Diabetes Database.
+
+✅ 2. Pre-processing the Dataset
+
+Before applying KNN, we prepare the data:
+
+a) Handling Missing or Zero Values
+
+Several features contain biologically impossible values like 0 for:
+
+Blood Pressure
+
+BMI
+
+Skin Thickness
+
+Glucose
+
+These are replaced using:
+✅ Mean/Median imputation
+✅ Or removed based on strategy
+
+b) Feature–Target Split
+
+X → All input features
+
+y → Outcome (0/1)
+
+c) Train-Test Split
+
+Typically 70:30 or 80:20 split.
+
+d) Normalization
+
+KNN uses distance, so all features must be on the same scale.
+Use StandardScaler:
+
+𝑧
+=
+𝑥
+−
+𝜇
+𝜎
+z=
+σ
+x−μ
+	​
+
+✅ 3. K-Nearest Neighbors Algorithm
+Concept
+
+KNN is a distance-based supervised learning algorithm.
+
+Steps:
+
+Choose a value of K (e.g., 3,5,7).
+
+Compute distance from the new sample to all training samples (most commonly Euclidean distance).
+
+Pick the K closest neighbors.
+
+Use majority voting for classification.
+
+Distance formula
+𝑑
+=
+∑
+(
+𝑥
+𝑖
+−
+𝑦
+𝑖
+)
+2
+d=
+∑(x
+i
+	​
+
+−y
+i
+	​
+
+)
+2
+	​
+
+Choosing K
+
+Small K → noisy, overfitting
+
+Large K → smooth decision boundary, may underfit
+
+You normally evaluate K from 3 to 15 and choose the best using accuracy or cross-validation.
+
+✅ 4. Model Evaluation Metrics
+
+After prediction on test data:
+
+✅ Confusion Matrix
+
+A 2×2 table:
+
+	Predicted 0	Predicted 1
+Actual 0	True Negative (TN)	False Positive (FP)
+Actual 1	False Negative (FN)	True Positive (TP)
+✅ Accuracy
+Accuracy
+=
+𝑇
+𝑃
++
+𝑇
+𝑁
+𝑇
+𝑃
++
+𝑇
+𝑁
++
+𝐹
+𝑃
++
+𝐹
+𝑁
+Accuracy=
+TP+TN+FP+FN
+TP+TN
+	​
+
+✅ Error Rate
+Error Rate
+=
+1
+−
+Accuracy
+Error Rate=1−Accuracy
+✅ Precision
+
+(Out of predicted diabetics, how many are correct?)
+
+Precision
+=
+𝑇
+𝑃
+𝑇
+𝑃
++
+𝐹
+𝑃
+Precision=
+TP+FP
+TP
+	​
+
+✅ Recall (Sensitivity)
+
+(Out of actual diabetics, how many are detected?)
+
+Recall
+=
+𝑇
+𝑃
+𝑇
+𝑃
++
+𝐹
+𝑁
+Recall=
+TP+FN
+TP
+	​
+
+✅ Expected Result Discussion
+
+The diabetes dataset is imbalanced, so:
+
+Accuracy may be misleading
+
+Precision & Recall are more meaningful
+
+KNN performance depends heavily on K, distance metric, and scaling
+
+Typical performance:
+
+Accuracy: 70–80%
+
+Better recall is preferred (missing diabetic patients is costly)
+
+✅ Short Viva Questions & Answers
+Q1: Why do we normalize data for KNN?
+
+KNN uses distances; unscaled features dominate the metric unfairly.
+
+Q2: What is the ideal value of K?
+
+Determined through experimentation—generally odd numbers like 5, 7, 9.
+
+Q3: Why is KNN slow for large datasets?
+
+Because it computes distance to all points at prediction time (lazy learner).
+
+Q4: Why use confusion matrix?
+
+To visualize correct and incorrect classifications and assess model reliability.
+
+Q5: Why is diabetes prediction a classification problem?
+
+Because the outcome is categorical (diabetic = 1 or not = 0).
