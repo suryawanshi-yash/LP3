@@ -1,0 +1,169 @@
+✅ Theory for Email Spam Detection Using Binary Classification (KNN & SVM)
+1. Introduction
+
+Email spam detection is a binary classification problem where the goal is to automatically determine whether an email is:
+
+Normal State → Not Spam (label = 0)
+
+Abnormal State → Spam (label = 1)
+
+Machine learning models can learn patterns from email text (words, frequency, structure) and classify future emails accordingly. In this practical, we use two supervised ML algorithms:
+
+K-Nearest Neighbors (KNN)
+
+Support Vector Machine (SVM)
+
+✅ 2. Pre-processing the Dataset
+
+The emails.csv dataset contains email content along with spam labels. Pre-processing steps ensure the text can be used by ML models.
+
+Steps:
+(a) Remove Missing or Duplicate Values
+
+Cleaning ensures that only valid rows are used.
+
+(b) Text Normalization
+
+Convert raw email into structured numerical form:
+
+Convert text to lowercase
+
+Remove punctuation, numbers, and special characters
+
+Remove stopwords (e.g., “the”, “and”, “is”)
+
+Apply stemming or lemmatization
+
+(c) Feature Extraction (Vectorization)
+
+Since ML models require numerical data, text is converted using:
+
+Bag-of-Words (BoW)
+
+TF-IDF (Term Frequency – Inverse Document Frequency) ← most commonly used
+
+TF-IDF gives weight to important words while reducing the influence of common ones.
+
+(d) Train-Test Split
+
+Usually:
+70% training data + 30% testing data
+
+✅ 3. Implementing Classification Models
+✅ A. K-Nearest Neighbors (KNN)
+Concept:
+
+KNN classifies an email by looking at its ‘K’ closest neighbors in the vector space.
+If most neighbors are spam → email is classified as spam.
+
+Characteristics:
+
+Simple and intuitive
+
+Works well for smaller datasets
+
+Computationally expensive for large text datasets
+
+Sensitive to feature scaling
+
+Key Parameter:
+
+K (number of neighbors): usually odd numbers like 3, 5, 7.
+
+✅ B. Support Vector Machine (SVM)
+Concept:
+
+SVM finds the best hyperplane that separates spam and non-spam emails with the maximum margin.
+
+Characteristics:
+
+Very effective in high-dimensional data like text
+
+Handles large feature spaces well (due to TF-IDF vectors)
+
+Robust to overfitting
+
+Kernel trick improves accuracy
+
+Common Kernel:
+
+Linear Kernel (best for text classification)
+
+RBF Kernel if non-linear separation is required
+
+✅ 4. Model Evaluation
+Metrics Used:
+
+Accuracy
+Portion of correctly predicted emails.
+
+Precision
+Out of the emails predicted as spam, how many were actually spam?
+
+Recall
+Out of all real spam emails, how many did the model detect?
+
+F1-Score
+Harmonic mean of precision and recall; best for imbalanced datasets.
+
+Confusion Matrix
+Summarizes TP, TN, FP, FN.
+
+✅ 5. Performance Comparison
+✅ Expected Observations
+K-Nearest Neighbors
+
+Moderate accuracy
+
+Slow for large datasets
+
+Performance depends greatly on value of K
+
+Sensitive to scaling and high dimensionality
+
+Support Vector Machine
+
+Usually higher accuracy than KNN
+
+Works extremely well with TF-IDF
+
+Faster and more efficient with large text data
+
+Often achieves highest precision in spam detection tasks
+
+✅ Conclusion
+
+SVM generally performs better than KNN for email spam classification because:
+
+Text datasets have high dimensionality
+
+SVM handles large feature spaces efficiently
+
+SVM provides better generalization and boundary separation
+
+Thus, SVM is preferred for real-world spam detection systems.
+
+✅ Short Viva Questions (Useful in Practical Exam)
+Q1. What is binary classification?
+
+A task that classifies data into two categories (spam/not spam).
+
+Q2. Why do we use TF-IDF?
+
+To convert text into numerical features while giving more weight to important words.
+
+Q3. Why does SVM perform better for text data?
+
+Because text has high-dimensional sparse vectors and SVM handles them efficiently.
+
+Q4. What is K in KNN?
+
+K represents the number of nearest neighbors used for decision-making.
+
+Q5. What is the confusion matrix?
+
+A table showing TP, TN, FP, FN to evaluate model performance.
+
+Q6. What is the main weakness of KNN?
+
+It becomes slow and inaccurate with large, high-dimensional datasets like emails.
