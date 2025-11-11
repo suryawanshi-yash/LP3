@@ -1,0 +1,490 @@
+https://chatgpt.com/share/691342cd-6894-8004-926b-6b6ed60b3de6
+✅ Theory for Gradient Descent Algorithm
+✅ 1. Introduction
+
+Gradient Descent is an optimization algorithm used to find the minimum value of a function.
+It works by moving step-by-step in the direction opposite to the gradient (i.e., downhill), because the gradient points toward the direction of maximum increase.
+
+This algorithm is widely used in:
+
+Machine learning
+
+Deep learning
+
+Mathematical optimization
+
+✅ 2. Concept Behind Gradient Descent
+✅ Why Gradient?
+
+The gradient of a function tells us:
+
+which direction increases the function value
+
+how steep the slope is
+
+To find the minimum, we want to move in the negative direction of the gradient.
+
+✅ General Update Rule
+
+For a function 
+𝑓
+(
+𝑥
+)
+f(x), Gradient Descent updates the value of 
+𝑥
+x as:
+
+𝑥
+new
+=
+𝑥
+old
+−
+𝜂
+⋅
+𝑓
+′
+(
+𝑥
+)
+x
+new
+	​
+
+=x
+old
+	​
+
+−η⋅f
+′
+(x)
+
+Where:
+
+𝜂
+η = learning rate (step size)
+
+𝑓
+′
+(
+𝑥
+)
+f
+′
+(x) = derivative (slope)
+
+Subtract because we want to move downhill
+
+If 
+𝜂
+η is:
+
+Too small → algorithm is slow
+
+Too large → algorithm diverges
+
+✅ 3. Mathematical Example
+
+We want to minimize:
+
+𝑦
+=
+(
+𝑥
++
+3
+)
+2
+y=(x+3)
+2
+✅ Step 1: Compute derivative
+𝑦
+=
+(
+𝑥
++
+3
+)
+2
+y=(x+3)
+2
+𝑑
+𝑦
+𝑑
+𝑥
+=
+2
+(
+𝑥
++
+3
+)
+dx
+dy
+	​
+
+=2(x+3)
+
+So the gradient is:
+
+𝑓
+′
+(
+𝑥
+)
+=
+2
+(
+𝑥
++
+3
+)
+f
+′
+(x)=2(x+3)
+✅ 4. Apply Gradient Descent Update Rule
+𝑥
+new
+=
+𝑥
+−
+𝜂
+⋅
+2
+(
+𝑥
++
+3
+)
+x
+new
+	​
+
+=x−η⋅2(x+3)
+
+Choose learning rate:
+
+𝜂
+=
+0.1
+η=0.1
+
+Initial point:
+
+𝑥
+0
+=
+2
+x
+0
+	​
+
+=2
+✅ 5. Iterations (How Gradient Descent Moves Downhill)
+Iteration 0:
+𝑥
+0
+=
+2
+x
+0
+	​
+
+=2
+
+Compute gradient:
+
+𝑓
+′
+(
+2
+)
+=
+2
+(
+2
++
+3
+)
+=
+10
+f
+′
+(2)=2(2+3)=10
+
+Update:
+
+𝑥
+1
+=
+2
+−
+0.1
+⋅
+10
+=
+1
+x
+1
+	​
+
+=2−0.1⋅10=1
+Iteration 1:
+𝑥
+1
+=
+1
+x
+1
+	​
+
+=1
+𝑓
+′
+(
+1
+)
+=
+2
+(
+1
++
+3
+)
+=
+8
+f
+′
+(1)=2(1+3)=8
+𝑥
+2
+=
+1
+−
+0.1
+⋅
+8
+=
+0.2
+x
+2
+	​
+
+=1−0.1⋅8=0.2
+Iteration 2:
+𝑥
+2
+=
+0.2
+x
+2
+	​
+
+=0.2
+𝑓
+′
+(
+0.2
+)
+=
+2
+(
+0.2
++
+3
+)
+=
+6.4
+f
+′
+(0.2)=2(0.2+3)=6.4
+𝑥
+3
+=
+0.2
+−
+0.1
+⋅
+6.4
+=
+−
+0.44
+x
+3
+	​
+
+=0.2−0.1⋅6.4=−0.44
+After many iterations:
+
+The value of 
+𝑥
+x approaches:
+
+𝑥
+→
+−
+3
+x→−3
+
+Which is the minimum of the function.
+
+✅ 6. Why Does It Converge to –3?
+
+Because:
+
+(
+𝑥
++
+3
+)
+2
+(x+3)
+2
+
+is smallest when:
+
+𝑥
++
+3
+=
+0
+⇒
+𝑥
+=
+−
+3
+x+3=0⇒x=−3
+
+Gradient Descent gradually moves toward this value by taking steps in the negative direction of the derivative.
+
+✅ 7. Stopping Conditions
+
+We stop when:
+
+Gradient becomes very small
+
+∣
+𝑓
+′
+(
+𝑥
+)
+∣
+<
+𝜖
+∣f
+′
+(x)∣<ϵ
+
+Change in x is small
+
+∣
+𝑥
+new
+−
+𝑥
+old
+∣
+<
+𝜖
+∣x
+new
+	​
+
+−x
+old
+	​
+
+∣<ϵ
+
+Maximum iterations reached
+
+This indicates that the algorithm has reached the local minimum.
+
+✅ 8. Summary of the Mathematical Idea
+We want to minimize:
+𝑓
+(
+𝑥
+)
+=
+(
+𝑥
++
+3
+)
+2
+f(x)=(x+3)
+2
+Take derivative:
+𝑓
+′
+(
+𝑥
+)
+=
+2
+(
+𝑥
++
+3
+)
+f
+′
+(x)=2(x+3)
+Use update rule:
+𝑥
+𝑘
++
+1
+=
+𝑥
+𝑘
+−
+𝜂
+⋅
+2
+(
+𝑥
+𝑘
++
+3
+)
+x
+k+1
+	​
+
+=x
+k
+	​
+
+−η⋅2(x
+k
+	​
+
++3)
+Start at:
+
+𝑥
+=
+2
+x=2
+
+After repeated updates:
+𝑥
+→
+−
+3
+x→−3
+Therefore:
+
+The local minimum of the function is −3.
+
+✅ Simple Explanation (for Viva)
+
+Gradient descent checks the slope of the function.
+If slope is positive → move left
+If slope is negative → move right
+Steps are controlled by the learning rate.
+By repeating this, we slowly approach the point where slope becomes zero → the minimum.
