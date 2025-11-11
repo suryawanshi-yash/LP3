@@ -1,0 +1,124 @@
+✅ Fibonacci Number Calculation – Theory, Steps, and Complexities
+
+The Fibonacci sequence is:
+
+F(0) = 0, F(1) = 1
+F(n) = F(n–1) + F(n–2) for n ≥ 2
+
+We can compute this using:
+
+Recursive method (direct recursion)
+
+Non-recursive method (iterative / dynamic)
+
+Let’s break down both.
+
+✅ 1. Recursive Approach (Naive Recursion)
+✅ Concept
+
+This method follows the mathematical definition directly.
+
+To compute F(n), the algorithm calls:
+
+F(n–1)
+
+F(n–2)
+
+Each of these calls further calls two more functions, and so on.
+
+This forms a binary recursion tree.
+
+✅ Step Count Intuition
+
+Let T(n) = number of steps to compute F(n).
+
+Because the algorithm calls itself twice for each non-base case:
+
+T(n) = T(n–1) + T(n–2) + 1
+
+This recurrence grows like the Fibonacci sequence itself.
+
+Step count ≈ F(n)
+which grows exponentially.
+
+✅ Time Complexity
+
+Because the recursion tree has exponential size:
+
+✅ Time: O(2ⁿ) (more precisely ~O(1.618ⁿ))
+This is extremely slow for large n.
+
+✅ Space Complexity
+
+Space = height of recursion tree = depth of function calls
+
+Depth = n
+
+✅ Space: O(n)
+This is from the call stack.
+
+✅ 2. Non-Recursive Approach (Iterative / Dynamic Programming)
+✅ Concept
+
+Iteratively compute Fibonacci values from bottom up:
+
+Start with F(0) and F(1)
+
+Keep adding the two previous numbers to get the next one
+
+Repeat until you reach F(n)
+
+This avoids repeated recomputation.
+
+✅ Step Count Intuition
+
+There is one loop running from 2 to n, and each iteration does constant work:
+
+Step count ≈ (n – 1)
+
+So step count grows linearly.
+
+✅ Time Complexity
+
+✅ Time: O(n)
+Much faster than recursion.
+
+✅ Space Complexity
+
+Two common possibilities:
+
+A. Using just 2 variables (most common)
+
+Keep only prev and curr.
+
+✅ Space: O(1)
+
+B. Using an array to store all values
+
+Useful if you need every Fibonacci value, not just the final one.
+
+✅ Space: O(n)
+
+✅ Comparing Both Approaches
+Approach	Time Complexity	Space Complexity	Step Count	Notes
+Recursive (naive)	O(2ⁿ)	O(n)	exponential (≈F(n))	Slow, repeated calls
+Iterative	O(n)	O(1)	linear	Fast and efficient
+✅ Short, Exam-Ready Summary
+
+Use this when writing your practical viva/theory answer:
+
+Recursive Fibonacci uses the direct mathematical recurrence. It recomputes values multiple times, forming an exponential recursion tree.
+
+Time: O(2ⁿ)
+
+Space: O(n) due to recursion depth
+
+Step count grows like Fibonacci numbers → exponential
+
+Iterative Fibonacci computes values from bottom-up using a loop, with no repeated work.
+
+Time: O(n)
+
+Space: O(1) (two variables)
+
+Step count grows linearly
