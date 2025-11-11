@@ -1,0 +1,155 @@
+✅ Huffman Encoding — Theory Using Greedy Method
+
+Huffman Encoding is a compression technique that assigns shorter codes to more frequent characters and longer codes to less frequent characters, minimizing the total cost of encoding.
+
+It is a classic example of using a greedy strategy to build an optimal prefix-free code.
+
+✅ 1. Purpose of Huffman Coding
+
+Given characters with frequencies (or probabilities), we want to construct a binary tree such that:
+
+Frequent characters get shorter binary codes
+
+Infrequent characters get longer binary codes
+
+No code is a prefix of another → prefix-free
+
+Goal: Minimize the total weighted path length
+Σ (frequency × code length)
+
+✅ 2. Why Huffman Is a Greedy Strategy
+
+At every step, we:
+
+✅ Pick the two characters with the smallest frequencies
+✅ Combine them to form a new node whose frequency is the sum
+✅ Insert this back into the list and repeat
+
+This local choice of combining the two least frequent symbols leads to the globally optimal prefix-free code.
+
+That is exactly what a greedy algorithm does.
+
+✅ 3. Huffman Encoding Algorithm (Greedy)
+Step 1: Input
+
+List of characters with their frequencies.
+
+Step 2: Create Leaf Nodes
+
+Each character becomes a leaf node of a binary tree.
+
+Step 3: Build a Min-Heap (Priority Queue)
+
+Insert all nodes into a min-heap sorted by frequency.
+
+Step 4: Construct the Huffman Tree
+
+Repeat until only one node remains:
+
+Extract the two nodes with the minimum frequency.
+
+Create a new internal node whose frequency = sum of both.
+
+Make the two nodes left and right children.
+
+Insert the new node back into the min-heap.
+
+The final node remaining is the root of the Huffman tree.
+
+Step 5: Generate Codes
+
+Traverse the tree:
+
+Left edge → ‘0’
+
+Right edge → ‘1’
+
+The leaf nodes receive their codewords.
+
+✅ 4. Example (Concept Only, No Code)
+
+If frequencies are like:
+
+Char	Freq
+A	5
+B	9
+C	12
+D	13
+E	16
+F	45
+
+Huffman will first combine the smallest (A, B) → new node 14,
+then combine 12 and 13 → new node 25, etc.
+
+Greedy choice happens at every merge step.
+
+✅ 5. Why Huffman Coding Is Optimal
+
+Because:
+
+It is based on optimal merge pattern
+
+It always merges the two smallest frequency nodes
+
+Proven using the greedy-choice property and optimal substructure
+
+Thus, Huffman coding always gives the minimum weighted path length.
+
+✅ 6. Time Complexity Analysis
+
+The main operations happen in the min-heap.
+
+Let:
+
+n = number of unique characters
+
+✅ Heap operations:
+
+Building the heap → O(n)
+
+Extraction (n − 1 times) → each O(log n)
+
+Insertion (n − 1 times) → each O(log n)
+
+✅ Total Time:
+O(n log n)
+
+
+This is the standard complexity of Huffman coding.
+
+✅ 7. Space Complexity Analysis
+
+Space is used to store:
+
+All tree nodes (leaf + internal)
+
+The min-heap structure
+
+The final Huffman tree
+
+Number of total nodes ≈ 2n − 1
+
+Thus:
+
+✅ Space Complexity: O(n)
+
+If you include code storage (binary strings), it becomes:
+
+✅ Worst-case: O(n × L)
+Where L = maximum code length.
+
+But algorithmically, we consider:
+
+✅ Huffman Algorithm Space: O(n)
+
+✅ 8. Exam-Ready Summary / Practical Write-Up
+
+Huffman coding is a greedy algorithm used for optimal prefix-free encoding. It constructs a binary tree by repeatedly selecting the two symbols with the smallest frequencies, merging them into a new node, and reinserting the node into a min-heap. This continues until a single tree remains. Traversing the tree assigns binary codes to characters, ensuring shorter codes for more frequent characters and minimizing total encoding cost.
+
+Time Complexity: O(n log n) due to heap operations
+
+Space Complexity: O(n) for storing the tree and priority queue
+
+Greedy Strategy: Always combine the two least frequent nodes
+
+Output: Optimal prefix-free binary codes for each character
