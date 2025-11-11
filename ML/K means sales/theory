@@ -1,0 +1,253 @@
+✅ Theory for Clustering on Sales Dataset (K-Means & Hierarchical Clustering)
+Aim
+
+To apply K-Means clustering and Hierarchical clustering on the sales_data_sample.csv dataset and determine the optimal number of clusters using the Elbow method.
+
+✅ 1. Introduction
+
+Clustering is an unsupervised learning method used to identify groups of similar data points based on pattern similarity.
+For the sales dataset, the goal is typically to group:
+
+Products
+
+Customers
+
+Orders
+
+Or regions
+
+based on features such as Sales, Quantity Ordered, Price, Order Value, Profit, etc.
+
+This helps in:
+
+Customer segmentation
+
+Sales forecasting
+
+Targeted marketing
+
+Product performance analysis
+
+✅ 2. Data Pre-processing
+
+Before clustering, the dataset must be cleaned and transformed:
+
+a) Handling Missing Values
+
+Check for nulls in features such as:
+
+SALES
+
+QUANTITYORDERED
+
+PRICEEACH
+
+ORDERDATE
+Remove or impute depending on type.
+
+b) Selecting Numerical Features
+
+K-Means and Hierarchical clustering require numeric input.
+Typical features selected:
+
+SALES
+
+QUANTITYORDERED
+
+PRICEEACH
+
+ORDERLINENUMBER
+
+Categorical features (ORDERSTATUS, COUNTRY, PRODUCTLINE) can be encoded if needed.
+
+c) Scaling the Data
+
+Clustering algorithms use distance measures, so we must scale all numeric features using:
+
+Standardization (Z-score):
+
+𝑧
+=
+𝑥
+−
+𝜇
+𝜎
+z=
+σ
+x−μ
+	​
+
+
+Or Min-Max normalization
+
+This prevents large-magnitude variables (like SALES) from dominating.
+
+✅ 3. K-Means Clustering
+Concept
+
+K-Means partitions the dataset into K clusters by minimizing the within-cluster sum of squares (WCSS).
+
+Algorithm Steps
+
+Select K (number of clusters).
+
+Initialize K centroids randomly.
+
+Assign each data point to the closest centroid (Euclidean distance).
+
+Recalculate centroids based on assigned points.
+
+Repeat steps 3–4 until convergence.
+
+Distance Metric
+𝑑
+(
+𝑥
+,
+𝑦
+)
+=
+∑
+(
+𝑥
+𝑖
+−
+𝑦
+𝑖
+)
+2
+d(x,y)=
+∑(x
+i
+	​
+
+−y
+i
+	​
+
+)
+2
+	​
+
+Output
+
+Cluster labels for each record
+
+Cluster centers
+
+Visualization (2D/3D if required)
+
+✅ 4. Determining the Number of Clusters — Elbow Method
+
+The Elbow method is used to choose the optimal value of K.
+
+Procedure
+
+Run K-means for different values of K (e.g., 1–10).
+
+Compute WCSS (Within-Cluster Sum of Squares) for each K.
+
+Plot K on x-axis vs WCSS on y-axis.
+
+The “elbow point” is where the decrease in WCSS becomes gradual, forming a bend.
+
+This K is chosen as the optimal number of clusters.
+
+Interpretation
+
+Too few clusters → high WCSS (bad segmentation)
+
+Too many clusters → overfitting, no clear patterns
+
+The elbow balances performance and simplicity.
+
+✅ 5. Hierarchical Clustering (Agglomerative)
+Concept
+
+Hierarchical clustering builds a tree-like structure (dendrogram) showing how data points merge into clusters.
+
+Types
+
+Agglomerative (Bottom-up):
+Each point starts as its own cluster → progressively merged
+
+Divisive (Top-down):
+Entire data → repeatedly split
+
+Agglomerative is used in most practical cases.
+
+Algorithm Steps
+
+Treat each sample as a separate cluster.
+
+Compute distance matrix between all clusters.
+
+Merge the two closest clusters based on linkage criteria.
+
+Update the distance matrix and repeat until one cluster remains.
+
+Linkage Methods
+
+Single linkage → min distance
+
+Complete linkage → max distance
+
+Average linkage → mean distance
+
+Ward’s linkage → minimizes variance (best for numeric data)
+
+Output
+
+Dendrogram
+
+Optimal cluster count determined by cutting dendrogram at a height where natural grouping appears.
+
+✅ 6. Comparison Between K-Means and Hierarchical Clustering
+Feature	K-Means	Hierarchical
+Type	Partitional	Tree-structured
+Speed	Fast for large datasets	Slower (O(n²))
+Clusters	Requires pre-deciding K	Determined from dendrogram
+Data size	Efficient for large N	Suitable for small–medium datasets
+Output	Cluster centers	Dendrogram for full structure
+✅ 7. Practical Output / Results Discussion
+
+After running the algorithms:
+
+K-Means
+
+WCSS decreases rapidly at first
+
+Elbow typically around K = 3 or 4 for sales data
+
+Clusters group orders/products by sales volume, quantity, and price
+
+Hierarchical Clustering
+
+Dendrogram shows groups visually
+
+Cutting at a reasonable height gives similar clusters (often 3–4 groups)
+
+✅ 8. Viva Questions & Answers
+Q1: Why do we scale the data before clustering?
+
+Because clustering uses distances; unscaled features bias the result.
+
+Q2: What is WCSS?
+
+Within-Cluster Sum of Squares – total variance within clusters.
+
+Q3: Why is the elbow method used?
+
+To determine the optimal cluster count where adding more clusters gives minimal improvement.
+
+Q4: Difference between K-Means and Hierarchical?
+
+K-Means is fast and needs K beforehand; hierarchical is slower but visually informative.
+
+Q5: What is a dendrogram?
+
+A tree diagram showing how clusters merge at different distances.
+
+Q6: Why can K-Means give different results on different runs?
+
+Because it initializes centroids randomly.
