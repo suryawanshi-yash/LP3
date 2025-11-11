@@ -1,0 +1,193 @@
+✅ Theory for Bank Customer Churn Prediction Using Neural Networks
+Objective
+
+The goal is to build an Artificial Neural Network (ANN) model that predicts whether a bank customer will leave the bank (churn) within the next 6 months based on their demographic and financial profile.
+
+The Kaggle dataset contains 10,000 customers and 14 features, including:
+
+CreditScore
+
+Geography
+
+Gender
+
+Age
+
+Tenure
+
+Balance
+
+Number of Products
+
+HasCrCard
+
+IsActiveMember
+
+EstimatedSalary
+
+The target variable is:
+✅ Exited – 1 (Customer left)
+✅ Exited – 0 (Customer stayed)
+
+✅ 1. Reading the Dataset
+
+The dataset is loaded using pandas (e.g., read_csv).
+Key steps involve:
+
+Understanding data types
+
+Checking for missing values
+
+Inspecting target variable distribution
+
+Exploring basic statistics
+
+The dataset is already clean and contains no missing values.
+
+✅ 2. Feature–Target Separation and Train-Test Split
+Feature Set (X)
+
+All independent variables except “Exited”.
+
+Target Set (y)
+
+Exited (0 or 1)
+
+Encoding Categorical Variables
+
+Neural networks require numerical inputs.
+Therefore:
+
+Label Encoding for Gender
+
+One-Hot Encoding for Geography
+
+Splitting the Data
+
+Use an 80-20 or 70-30 split:
+
+Training Set → used to learn model weights
+
+Test Set → used to evaluate performance
+
+✅ 3. Normalizing Train and Test Data
+
+ANNs perform best when input features are on similar scales.
+
+We use StandardScaler or MinMaxScaler, which transforms features so:
+
+mean = 0
+
+variance = 1
+(or range 0–1 for MinMax)
+
+Normalization helps the model:
+
+converge faster
+
+avoid exploding gradients
+
+perform better on numerical stability
+
+✅ 4. Initializing and Building the Neural Network Model
+
+A typical ANN architecture used here:
+
+✅ Input Layer
+
+Number of neurons = number of input features (e.g., 11 after encoding)
+
+✅ Hidden Layers
+
+1 or 2 Dense layers with:
+
+ReLU activation
+
+6–16 neurons
+
+Regularization if needed: dropout, L2, etc.
+
+✅ Output Layer
+
+1 neuron
+
+Activation = Sigmoid
+
+Output = probability of customer churn (0–1)
+
+✅ Model Compilation
+
+Optimizer: Adam
+
+Loss Function: Binary Crossentropy
+
+Metric: Accuracy
+
+✅ Training the Model
+
+Run for 50–100 epochs depending on performance.
+
+Common Issues and Improvements
+
+✅ Adding more hidden layers
+✅ Using Dropout to reduce overfitting
+✅ Increasing training epochs
+✅ Adjusting learning rate
+✅ Hyperparameter tuning (batch size, optimizer, activation)
+
+Improvement involves experimentation to achieve higher accuracy and better generalization.
+
+✅ 5. Evaluation: Accuracy Score & Confusion Matrix
+
+After predictions:
+
+✅ Accuracy
+
+Percentage of correct predictions.
+
+✅ Confusion Matrix
+
+Shows:
+
+TP – True Positives (correct churn predictions)
+
+TN – True Negatives (correct non-churn predictions)
+
+FP – False Positives
+
+FN – False Negatives
+
+The confusion matrix helps us understand:
+
+how many churners were correctly identified
+
+whether the model is biased toward predicting non-churn
+
+✅ Typical Performance
+
+A well-designed ANN can achieve:
+
+80–87% accuracy
+
+Good recall and precision for the churn class
+
+✅ Short Viva Questions & Answers
+Q1: Why do we normalize the data?
+
+To ensure all features contribute equally and help the ANN train efficiently.
+
+Q2: Why use Sigmoid in the output layer?
+
+Because it outputs a value between 0 and 1 for binary classification.
+
+Q3: What is Binary Crossentropy?
+
+A loss function that measures how well probabilities match binary labels.
+
+Q4: Why do we need One-Hot Encoding?
+
+To convert categorical variables (like Geography) into numeric form.
+
+Q5: Why does ANN perform well for churn prediction?
+
+Because it can capture complex relationships between multiple features.
