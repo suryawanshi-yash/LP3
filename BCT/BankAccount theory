@@ -1,0 +1,128 @@
+🧠 Conceptual Theory
+1. What is a Smart Contract?
+
+A smart contract is a self-executing program stored on a blockchain that runs when predefined conditions are met.
+They automate execution of agreements, ensuring all participants are immediately certain of the outcome — without intermediaries.
+
+Smart contracts are written in Solidity (for Ethereum-like blockchains).
+
+They are deployed on Ethereum Test Networks such as Rinkeby, Goerli, Sepolia, etc.
+
+2. Purpose of the Practical
+
+This program simulates a bank account using a smart contract:
+
+Allows a customer to deposit and withdraw funds.
+
+Maintains a balance on the blockchain (immutable and transparent).
+
+Demonstrates state management, transactional control, and access restriction (security via msg.sender).
+
+🧩 Concepts Used
+a) Blockchain Basics
+
+Blockchain is a distributed ledger of transactions.
+
+Each block stores a hash, timestamp, and data.
+
+Data once written cannot be altered → ensures immutability.
+
+b) Ethereum and Solidity
+
+Ethereum is a blockchain platform supporting smart contracts.
+
+Solidity is an object-oriented programming language for writing them.
+
+Contracts are deployed on Ethereum nodes, and users interact with them via transactions.
+
+c) Key Solidity Concepts in the Practical
+Concept	Description
+pragma solidity ^x.x.x	Defines compiler version.
+contract	Defines the smart contract structure.
+address	Represents Ethereum account (user or contract).
+msg.sender	The account address calling the contract function.
+payable	Allows a function or address to send/receive Ether.
+mapping(address => uint)	Stores key-value pairs; here, it maps a user’s address to their balance.
+require()	Used for input validation and error handling.
+public / private	Access specifiers.
+view	Function that only reads data, doesn’t modify state.
+d) Test Network
+
+Smart contracts are first deployed on test networks (like Sepolia) instead of the main Ethereum network, to avoid spending real Ether.
+
+You can use:
+
+Remix IDE (online Solidity editor)
+
+MetaMask wallet (to connect to test network)
+
+Test Ether (fake Ether for testing)
+
+⚙️ Algorithm / Working Steps
+
+Start
+
+Define a contract Bank.
+
+Create a mapping balance to store users’ balances.
+
+Implement function deposit():
+
+Accept Ether using payable.
+
+Add to balance[msg.sender].
+
+Implement function withdraw(uint amount):
+
+Check if balance[msg.sender] >= amount.
+
+Subtract and transfer amount.
+
+Implement function getBalance():
+
+Return balance[msg.sender].
+
+Deploy the contract on a test network using Remix.
+
+Interact with the functions via MetaMask.
+
+⏱️ Complexity Analysis
+Operation	Time Complexity	Space Complexity	Explanation
+Deposit	O(1)	O(n)	Constant time update; storage grows with number of users.
+Withdraw	O(1)	O(n)	Constant time check and update.
+Show Balance	O(1)	O(n)	Reads mapping in constant time.
+📚 Applications
+
+Banking and Financial Services (no intermediaries)
+
+Decentralized Finance (DeFi)
+
+Escrow systems
+
+Automated insurance claims
+
+Token management and wallet operations
+
+💬 Viva Questions (with Answers)
+Question	Answer
+What is a smart contract?	A program stored on a blockchain that executes automatically when conditions are met.
+Which language is used to write smart contracts on Ethereum?	Solidity.
+What is msg.sender?	The address of the account calling the function.
+Why use payable keyword?	To allow the contract to receive or send Ether.
+What is the difference between view and pure functions?	view can read state variables, pure cannot read or modify them.
+What is a test network?	A blockchain network for testing smart contracts without real Ether.
+What is require() used for?	To validate input and ensure conditions before proceeding.
+What is the use of mapping?	To store key-value pairs, e.g., user address → balance.
+Why is blockchain secure?	Because it is decentralized and uses cryptographic hashing for immutability.
+What is gas in Ethereum?	The fee required to execute operations on the Ethereum network.
+🧾 Summary
+
+Smart contract automates bank account operations (deposit, withdraw, balance check).
+
+Uses Solidity features like mapping, payable, and msg.sender.
+
+Deployed and tested on Ethereum test network via Remix + MetaMask.
+
+Time complexity: O(1) for all operations.
+
+Demonstrates core blockchain features: transparency, decentralization, immutability.
