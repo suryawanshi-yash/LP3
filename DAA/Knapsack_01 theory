@@ -143,3 +143,156 @@ Explores only promising parts of the solution space.
 
 Time: Worst O(2ⁿ), typically much faster
 Space: O(n)
+
+
+#--------
+⚙️ Step 1: DP Table Setup
+
+We build a DP table dp[i][w] meaning:
+
+maximum value achievable using the first i items and capacity w.
+
+Table size → (n+1) × (capacity+1)
+→ 4 × 51
+
+Initially, all zeros.
+
+🔁 Step 2: Fill DP Table Bottom-Up
+For each item i and capacity w:
+
+If weight of item ≤ capacity,
+
+𝑑
+𝑝
+[
+𝑖
+]
+[
+𝑤
+]
+=
+max
+⁡
+(
+value of item 
++
+𝑑
+𝑝
+[
+𝑖
+−
+1
+]
+[
+𝑤
+−
+𝑤
+𝑒
+𝑖
+𝑔
+ℎ
+𝑡
+]
+,
+ 
+𝑑
+𝑝
+[
+𝑖
+−
+1
+]
+[
+𝑤
+]
+)
+dp[i][w]=max(value of item +dp[i−1][w−weight], dp[i−1][w])
+
+Else
+
+𝑑
+𝑝
+[
+𝑖
+]
+[
+𝑤
+]
+=
+𝑑
+𝑝
+[
+𝑖
+−
+1
+]
+[
+𝑤
+]
+dp[i][w]=dp[i−1][w]
+Let’s go item by item:
+Item 1: value=60, weight=10
+
+For w < 10: can’t take item → dp[1][w] = 0
+For w ≥ 10: take item → dp[1][w] = 60
+
+So after item 1:
+
+Capacity	0–9	10–50
+dp[1][w]	0	60
+Item 2: value=100, weight=20
+
+For each capacity:
+
+For w < 20: can’t take → same as before
+
+For w ≥ 20: choose max between:
+
+Taking item 2 → 100 + dp[1][w - 20]
+
+Not taking → dp[1][w]
+
+Let's compute key values:
+
+w	dp[1][w - 20]	take (100 + …)	not take	dp[2][w]
+20	dp[1][0]=0	100	0	100
+30	dp[1][10]=60	160	60	160
+40	dp[1][20]=60	160	60	160
+50	dp[1][30]=60	160	60	160
+
+So after item 2:
+
+Capacity	0–9	10–19	20	30	40	50
+dp[2][w]	0	60	100	160	160	160
+Item 3: value=120, weight=30
+
+Now check again:
+
+w	dp[2][w - 30]	take (120 + …)	not take	dp[3][w]
+30	dp[2][0]=0	120	160	160
+40	dp[2][10]=60	180	160	180
+50	dp[2][20]=100	220	160	220
+
+So the final DP table last row (for all capacities) ends with:
+
+Capacity	0–9	10–19	20	30	40	50
+dp[3][w]	0	60	100	160	180	220
+🏆 Step 3: Result
+
+✅ Maximum value obtained:
+dp[3][50] = 220
+
+🔙 Step 4: Backtracking to Find Items
+
+We check from bottom up:
+
+i	w	dp[i][w]	dp[i-1][w]	Item Taken?	New w
+3	50	220	160	✅ Yes	w = 50 - 30 = 20
+2	20	100	0	✅ Yes	w = 20 - 20 = 0
+1	0	-	-	❌ No	—
+
+So items 2 and 3 are taken.
+
+✅ Final Output
+Maximum value obtained: 220.00
+Items included in the knapsack (by item number): [2, 3]
