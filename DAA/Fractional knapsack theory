@@ -97,3 +97,116 @@ Space Complexity: O(1) to O(n) depending on implementation
 Greedy Choice: Highest profit-to-weight ratio first
 
 Step Count: ~n log n
+#-------
+⚙️ Step 1: Compute Value-to-Weight Ratio
+
+Formula →
+
+ratio
+=
+value
+weight
+ratio=
+weight
+value
+	​
+
+Item	Value	Weight	Value/Weight Ratio
+1	60	10	6.0
+2	100	20	5.0
+3	120	30	4.0
+
+So:
+
+ratio = [
+    (6.0, 10, 60),
+    (5.0, 20, 100),
+    (4.0, 30, 120)
+]
+
+📊 Step 2: Sort by Ratio (Descending)
+
+Items are already sorted by ratio (highest to lowest):
+
+Ratio	Weight	Value
+6.0	10	60
+5.0	20	100
+4.0	30	120
+🏋️ Step 3: Start Filling the Knapsack
+Initial capacity = 50
+
+We go item by item in descending ratio order.
+
+➤ Item 1:
+
+Weight = 10 ≤ capacity 50
+→ Take whole item
+
+✅ Add value = 60
+Remaining capacity = 50 - 10 = 40
+
+Fractions list → [(60, 10, 1)]
+
+➤ Item 2:
+
+Weight = 20 ≤ capacity 40
+→ Take whole item
+
+✅ Add value = 100
+Remaining capacity = 40 - 20 = 20
+
+Fractions list → [(60, 10, 1), (100, 20, 1)]
+
+➤ Item 3:
+
+Weight = 30 > capacity 20
+→ Take fractional part
+
+Fraction = capacity / weight = 20 / 30 = 2/3 ≈ 0.6667
+
+✅ Add partial value = 120 × 2/3 = 80
+Remaining capacity = 0 (knapsack full)
+
+Fractions list →
+[(60, 10, 1), (100, 20, 1), (120, 30, 0.6667)]
+
+💰 Step 4: Compute Total Value
+Total value
+=
+60
++
+100
++
+80
+=
+240
+Total value=60+100+80=240
+✅ Step 5: Output
+
+Your program prints:
+
+Maximum value obtained: 240.00
+
+Details of items taken (value, weight, fraction taken):
+(60.0, 10.0, 1)
+(100.0, 20.0, 1)
+(120.0, 30.0, 0.6666666666666666)
+
+🧠 Summary of How It Works
+Step	Action	Result
+1	Compute value/weight ratios	Rank items by efficiency
+2	Sort items descending by ratio	Choose best first
+3	Fill knapsack from top of list	Take whole or fraction
+4	Stop when capacity = 0	Maximize total value
+
+✅ Final Answer:
+
+Maximum value = 240
+
+Items taken:
+
+Full of item 1
+
+Full of item 2
+
+⅔ of item 3
