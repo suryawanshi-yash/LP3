@@ -153,3 +153,118 @@ Space Complexity: O(n) for storing the tree and priority queue
 Greedy Strategy: Always combine the two least frequent nodes
 
 Output: Optimal prefix-free binary codes for each character
+
+
+#-----------
+🧩 Step 1: Count frequency of each character
+
+Your code first builds a frequency dictionary.
+
+Input: abbcda
+
+Character	Frequency
+a	2
+b	2
+c	1
+d	1
+
+So:
+
+freq_dict = {'a': 2, 'b': 2, 'c': 1, 'd': 1}
+
+⚙️ Step 2: Create nodes and a min-heap
+
+It then creates one Node per character with its frequency and stores them in a min-heap (priority queue) based on freq.
+
+So the heap starts like this (conceptually):
+
+[(1,'c'), (1,'d'), (2,'a'), (2,'b')]
+
+
+(Note: actual order may vary slightly because frequencies tie.)
+
+🌳 Step 3: Build the Huffman Tree
+
+Now it repeatedly takes the two smallest nodes and merges them until only one node (the root) remains.
+
+Let’s go step-by-step:
+
+1️⃣ Pop the smallest two:
+c (1) and d (1)
+→ Merge into new node:
+Node(None, 1+1=2)
+(left = c, right = d)
+
+Heap now: [a(2), b(2), merged(2)]
+
+2️⃣ Pop next two smallest:
+Let’s say we pop a(2) and b(2)
+→ Merge into new node:
+Node(None, 4) (left = a, right = b)
+
+Heap now: [merged(2), merged(4)]
+
+3️⃣ Final merge:
+Pop both → merged(2) and merged(4)
+→ Create new node (root):
+Node(None, 6) (left = merged(2) [from c,d], right = merged(4) [from a,b])
+
+Final tree:
+
+         (*,6)
+        /     \
+     (*,2)    (*,4)
+     /  \      /  \
+   c(1) d(1) a(2) b(2)
+
+🧠 Step 4: Generate Huffman codes
+
+Now, traverse the tree:
+
+Go left → add '0'
+
+Go right → add '1'
+
+Character	Path	Code
+c	left-left	00
+d	left-right	01
+a	right-left	10
+b	right-right	11
+
+So:
+
+codes_dict = {'c': '00', 'd': '01', 'a': '10', 'b': '11'}
+
+🧾 Step 5: Encode the input string
+
+Now, replace each character in "abbcda" with its code:
+
+Character	Code
+a	10
+b	11
+b	11
+c	00
+d	01
+a	10
+
+So the encoded string is:
+
+10 11 11 00 01 10
+
+
+→ Final encoded result:
+
+101111000110
+
+✅ Step 6: Output
+
+Your program prints:
+
+Huffman Codes for each character:
+c: 00
+d: 01
+a: 10
+b: 11
+
+Encoded string:
+101111000110
